@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <div id="baseArea"></div>
+    </body>
+
+    <script>
+        // ==================== ==================== ==================== ====================
+        // ==================== ==================== ==================== ====================
+        document.addEventListener("DOMContentLoaded", () => {
+            createBaseElements();
+        })
+
+
+
+        // ==================== ==================== ==================== ====================
+        // ==================== ==================== ==================== ====================
+        const createBaseElements = () => {
+            const baseArea = document.getElementById("baseArea");
+
+            const baseBody = document.createElement('div');
+            baseBody.style.background = "linear-gradient(#2E3192, #1BFFFF)";
+            baseArea.style.justifyContent = "center";
+            baseArea.style.alignItems = "center";
+            baseBody.style.display = "flex";
+            baseBody.style.height = "100vh";
+            baseBody.style.width = "100vw";
+
+            baseArea.appendChild(baseBody);
+        };
+    </script>
+</html>
