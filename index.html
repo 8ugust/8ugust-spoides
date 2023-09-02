@@ -7,10 +7,22 @@
 
     <script>
         // ==================== ==================== ==================== ====================
+        // Declare Global Variation
+        // ==================== ==================== ==================== ====================
+        let level = 1;
+
+
+
+
+
+        // ==================== ==================== ==================== ====================
+        // Document On Load Event
         // ==================== ==================== ==================== ====================
         document.addEventListener("DOMContentLoaded", () => {
             createBaseElements();
         })
+
+
 
 
 
@@ -19,15 +31,93 @@
         const createBaseElements = () => {
             const baseArea = document.getElementById("baseArea");
 
+            // =============== =============== =============== ===============
+            // Base Body
+            // =============== =============== =============== ===============
             const baseBody = document.createElement('div');
             baseBody.style.background = "linear-gradient(#2E3192, #1BFFFF)";
-            baseArea.style.justifyContent = "center";
-            baseArea.style.alignItems = "center";
+            baseBody.style.flexDirection = 'column';
+            baseBody.style.alignItems = "center";
             baseBody.style.display = "flex";
-            baseBody.style.height = "100vh";
-            baseBody.style.width = "100vw";
-
+            baseBody.style.height = "900px";
+            baseBody.style.width = "1000px";
             baseArea.appendChild(baseBody);
+
+
+
+            // =============== =============== =============== ===============
+            // Logo Area
+            // =============== =============== =============== ===============
+            const bodyHead = document.createElement('img');
+            bodyHead.src = './logo.png';
+            bodyHead.style.height = '10%';
+            bodyHead.style.width = '30%';
+            baseBody.appendChild(bodyHead);
+
+
+
+            // =============== =============== =============== ===============
+            // Level Area
+            // =============== =============== =============== ===============
+            // ========== ========== ========== ==========
+            // Level Wrapper
+            // ========== ========== ========== ==========
+            const levelArea = document.createElement('div');
+            levelArea.style.justifyContent = 'center';
+            levelArea.style.alignItems = 'center';
+            levelArea.style.display = 'flex';
+            levelArea.style.width = '100%';
+
+            // ========== ========== ========== ==========
+            // Level Up & Down Button
+            // ========== ========== ========== ==========
+            const levelBtnU = document.createElement('div');
+            const levelBtnD = document.createElement('div');
+            const levelText = document.createElement('div');
+            levelBtnU.style.cursor = levelBtnD.style.cursor = 'pointer';
+            levelBtnU.style.paddingLeft = levelBtnD.style.paddingLeft = '20px';
+            levelBtnU.style.paddingRight = levelBtnD.style.paddingRight = '20px';
+            levelBtnU.style.color = levelText.style.color = levelBtnD.style.color = '#EDEDED';
+            levelBtnD.innerHTML = '◀'; levelText.innerHTML = 'LV. ' + level; levelBtnU.innerHTML = '▶'; 
+            levelBtnU.style.fontSize = levelText.style.fontSize = levelBtnD.style.fontSize = '20px';
+
+            // ========== ========== ========== ==========
+            // Level Change Event
+            // ========== ========== ========== ==========
+            levelBtnD.addEventListener('click', () => {fnChangeLevel('U')});
+            levelBtnU.addEventListener('click', () => {fnChangeLevel('D')});
+            levelBtnU.addEventListener('mousedown', (e) => {e.target.style.color = 'grey';});
+            levelBtnD.addEventListener('mousedown', (e) => {e.target.style.color = 'grey';});
+            levelBtnU.addEventListener('mouseup', (e) => {e.target.style.color = '#EDEDED';});
+            levelBtnD.addEventListener('mouseup', (e) => {e.target.style.color = '#EDEDED';});
+
+            levelArea.appendChild(levelBtnD);
+            levelArea.appendChild(levelText);
+            levelArea.appendChild(levelBtnU);
+            baseBody.appendChild(levelArea);
         };
+
+
+
+
+
+        // ==================== ==================== ==================== ====================
+        // Function Level Change Evnet.
+        // ==================== ==================== ==================== ====================
+        const fnChangeLevel = (mode) => {
+            // =============== =============== =============== ===============
+            // Level Up Event
+            // =============== =============== =============== ===============
+            if (mode == 'U') {
+                
+            };
+
+            // =============== =============== =============== ===============
+            // Level Down Event
+            // =============== =============== =============== ===============
+            if (mode == 'D') {
+
+            };
+        }
     </script>
 </html>
