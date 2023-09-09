@@ -10,9 +10,13 @@
                     <div class="level-txt">Lv. <sapn id="level">1</sapn></div>
                     <div class="level-btn" id="levelUp" onclick="fnChangeLevel('U')">▶</div>
                 </div>
+                <div id="loading-wrap">
+                    <div class="loading-bar">
+                        <div>Loading</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="loading-wrap"></div>
         <style>
             /* ==================== ==================== ==================== */
             /* Default Area CSS */
@@ -21,7 +25,8 @@
                 -webkit-user-select:none;
                 -moz-user-select:none;
                 -ms-user-select:none;
-                user-select:none
+                user-select:none;
+                margin: 0 auto;
             }
 
             .base-wrap {
@@ -39,7 +44,7 @@
             }
 
             /* ==================== ==================== ==================== */
-            /* Level Area CSS */
+            /* Loading Area */
             /* ==================== ==================== ==================== */
             .level-wrap {
                 justify-content: center;
@@ -65,7 +70,67 @@
                 color: grey;
             }
 
-            #levelDn { opacity: 0; cursor: default; }
+            #levelDn { 
+                opacity: 0; 
+                cursor: default; 
+            }
+
+            /* ==================== ==================== ==================== */
+            /* Loading Area */
+            /* ==================== ==================== ==================== */
+            #loading-wrap {
+                background: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                display: none;
+                height: 900px;
+                width: 1000px;
+            }
+
+            .loading-bar {
+                border: 1px solid white;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                display: flex;
+                height: 100px;
+                width: 100px;
+                -webkit-animation: loadingBar 1s linear infinite;
+            }
+
+            .loading-bar > div {
+                color: white;
+                -webkit-animation: loadingTxt 1s linear infinite;
+            }
+
+            @-webkit-keyframes loadingBar {
+                0% {
+                    border-width: 1px;
+                }
+
+                50% {
+                    border-width: 20px;
+                }
+
+                100% {
+                    border-width: 1px;
+                }
+            }
+
+            @-webkit-keyframes loadingTxt {
+                0% {
+                    color: grey;
+                }
+
+                50% {
+                    color: white;
+                }
+
+                100% {
+                    color: grey;
+                }
+            }
         </style>
     </body>
 
