@@ -81,6 +81,26 @@ td {
     width: 100px;
 }
 
+.table-cell {
+    height: calc(100% - 20px);
+    width: calc(100% - 20px);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+}
+
+.beaker {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top-left-radius: 300deg;
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
 
 
 
