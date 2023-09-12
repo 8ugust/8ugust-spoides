@@ -76,44 +76,47 @@ const fnCreateTable = () => {
     // Initialized Table Inner HTML
     // =============== =============== =============== ===============
     const target = document.getElementById('tableTarget');
-    let count; target.innerHTML = '';
-    if (level == 1) { count = 3; totalRequid = 3; }
-    if (level == 2) { count = 4; totalRequid = 4; }
-    if (level == 3) { count = 5; totalRequid = 4; }
-    if (level == 4) { count = 6; totalRequid = 5; }
-    if (level == 5) { count = 7; totalRequid = 5; }
+    if (level == 1) totalRequid = 3;
+    if (level == 2) totalRequid = 4;
+    if (level == 3) totalRequid = 4;
+    if (level == 4) totalRequid = 5;
+    if (level == 5) totalRequid = 5;
     loading.display = 'flex';
+    target.innerHTML = '';
     fnCreateGameSet();
 
     // =============== =============== =============== ===============
     // Create New Table
     // =============== =============== =============== ===============
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < Number(level) + 2; i++) {
         const tr = document.createElement('tr');
-        for (let j = 0; j < count; j++) {
+        for (let j = 0; j < Number(level) + 2; j++) {
             // ========== ========== ========== ==========
             // Create Table Cell
             // ========== ========== ========== ==========
-            const requid = document.createElement('div');
             const beaker = document.createElement('div');
             const cell = document.createElement('div');
             cell.className = 'table-cell';
             beaker.className = 'beaker';
-
-            requid.style.width = '100%';
-            if (level == 1) requid.style.height = '33%';
-            if (level == 2) requid.style.height = '25%';
-            if (level == 3) requid.style.height = '25%';
-            if (level == 4) requid.style.height = '20%';
-            if (level == 5) requid.style.height = '20%';
             
-
+            // ========== ========== ========== ==========
+            // Define Requid CSS
+            // ========== ========== ========== ==========
+            for (k = 0; k < totalRequid; k++) {
+                const requid = document.createElement('div');
+                if (level == 1) requid.style.height = '33%';
+                if (level == 2) requid.style.height = '25%';
+                if (level == 3) requid.style.height = '25%';
+                if (level == 4) requid.style.height = '20%';
+                if (level == 5) requid.style.height = '20%';
+                requid.style.width = '100%';
+                beaker.appendChild(requid);
+            }
             
             // ========== ========== ========== ==========
             // Append Beaker Area To Table Cell
             // ========== ========== ========== ==========
             const td = document.createElement('td');
-            beaker.appendChild(requid);
             cell.appendChild(beaker);
             td.appendChild(cell);
             tr.appendChild(td);
@@ -121,6 +124,23 @@ const fnCreateTable = () => {
 
         target.appendChild(tr);
     }
+
+    // =============== =============== =============== ===============
+    // Set Game Data to Requid Area
+    // =============== =============== =============== ===============
+        // const array = []; const count = Math.pow((Number(level) + 2), 2) * totalRequid;
+        // for (let i = 0; i < count; i++) array.push(i);
+        // array.sort(() => Math.random() - 0.5);
+        
+
+        // const requidArea = document.querySelectorAll('.beaker div');
+        // for (let i = 0; i < count; i++) {
+        //     const div = requidArea[array[i]];
+        //     const set = gameSet[array[i]];
+            
+        // }
+
+
     
     loading.display = 'none';
 }
@@ -139,6 +159,16 @@ const fnCreateTable = () => {
 // 5 | 7 * 7 = 245
 // ==================== ==================== ==================== ====================
 const fnCreateGameSet = () => {
+    const color = ['a', 'b', 'c', 'd', 'e'];
     const line = Number(level) + 2;
-    console.log(totalRequid + ' | ' + line + ' * ' + line);
+    const loop = line * line;
+    gameSet.length = 0;
+
+    for (let i=0; i<loop; i++) {
+        for (let j=0; j<totalRequid; j++) {
+            gameSet.push(color[j]);
+        }
+    }
+
+    console.log(gameSet);
 }
