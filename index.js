@@ -126,9 +126,13 @@ const fnCreateTable = () => {
     }
 
     // =============== =============== =============== ===============
-    // Set Game Data to Requid Area
+    // Set Requid Class Name
     // =============== =============== =============== ===============
-    
+    Array.from(document.getElementsByClassName('beaker')).forEach( (beaker, i) => {
+        Array.from(beaker.childNodes).forEach( (div, j) => {
+            div.className = 'requid_' + gameSet[i][j];
+        })
+    });
         // const array = []; const count = Math.pow((Number(level) + 2), 2) * totalRequid;
         // for (let i = 0; i < count; i++) array.push(i);
         // array.sort(() => Math.random() - 0.5);
