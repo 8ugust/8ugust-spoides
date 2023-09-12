@@ -128,6 +128,7 @@ const fnCreateTable = () => {
     // =============== =============== =============== ===============
     // Set Game Data to Requid Area
     // =============== =============== =============== ===============
+    
         // const array = []; const count = Math.pow((Number(level) + 2), 2) * totalRequid;
         // for (let i = 0; i < count; i++) array.push(i);
         // array.sort(() => Math.random() - 0.5);
@@ -159,16 +160,35 @@ const fnCreateTable = () => {
 // 5 | 7 * 7 = 245
 // ==================== ==================== ==================== ====================
 const fnCreateGameSet = () => {
-    const color = ['a', 'b', 'c', 'd', 'e'];
+    const color = [1, 2, 3, 4, 5];
     const line = Number(level) + 2;
     const loop = line * line;
+    const tempSet = [];
     gameSet.length = 0;
 
+    // ==================== ==================== ====================
+    // Create Total Requid
+    // ==================== ==================== ====================
     for (let i=0; i<loop; i++) {
         for (let j=0; j<totalRequid; j++) {
-            gameSet.push(color[j]);
+            tempSet.push(color[j]);
         }
     }
 
-    console.log(gameSet);
+    // ==================== ==================== ====================
+    // Create Game Set Except Duplicate Case
+    // ==================== ==================== ====================
+    tempSet.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < loop; i++) {
+        const beaker = [];
+
+        while (beaker.length < totalRequid) {
+            const pop = tempSet.pop();
+            if (beaker.filter(x => x == pop).length == (totalRequid-1)) {
+                tempSet.push(pop); tempSet.sort(() => Math.random() - 0.5);
+            } else beaker.push(pop);
+        }
+
+        gameSet.push(beaker);
+    }
 }
