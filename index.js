@@ -103,14 +103,17 @@ const fnCreateTable = () => {
             // Define Requid CSS
             // ========== ========== ========== ==========
             for (k = 0; k < totalRequid; k++) {
-                const requid = document.createElement('div');
-                if (level == 1) requid.style.height = '33%';
-                if (level == 2) requid.style.height = '25%';
-                if (level == 3) requid.style.height = '25%';
-                if (level == 4) requid.style.height = '20%';
-                if (level == 5) requid.style.height = '20%';
-                requid.style.width = '100%';
-                beaker.appendChild(requid);
+                const requidP = document.createElement('div');
+                const requidC = document.createElement('div');
+                if (level == 1) requidP.style.height = '33%';
+                if (level == 2) requidP.style.height = '25%';
+                if (level == 3) requidP.style.height = '25%';
+                if (level == 4) requidP.style.height = '20%';
+                if (level == 5) requidP.style.height = '20%';
+                requidP.className = 'p-requid';
+                requidC.className = 'c-requid';
+                requidP.appendChild(requidC);
+                beaker.appendChild(requidP);
             }
             
             // ========== ========== ========== ==========
@@ -130,7 +133,7 @@ const fnCreateTable = () => {
     // =============== =============== =============== ===============
     Array.from(document.getElementsByClassName('beaker')).forEach( (beaker, i) => {
         Array.from(beaker.childNodes).forEach( (div, j) => {
-            div.className = 'requid_' + gameSet[i][j];
+            div.firstChild.className += ' requid_' + gameSet[i][j];
         })
     });
         // const array = []; const count = Math.pow((Number(level) + 2), 2) * totalRequid;

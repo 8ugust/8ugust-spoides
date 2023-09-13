@@ -101,14 +101,32 @@ td {
     width: 100%;
 }
 
-.requid_1 { background: linear-gradient(to right, #D4145A, #FBB03B); }
-.requid_2 { background: linear-gradient(to right, #009245, #FCEE21); }
-.requid_3 { background: linear-gradient(to right, #FFECD2, #FCB69F); }
-.requid_4 { background: linear-gradient(to right, #02AABD, #00CDAC); }
-.requid_5 { background: linear-gradient(to right, #662D8C, #ED1E79); }
+.requid_1 { background: linear-gradient(#D4145A, #FBB03B) repeat-x; }
+.requid_2 { background: linear-gradient(#009245, #FCEE21) repeat-x; }
+.requid_3 { background: linear-gradient(#FFECD2, #FCB69F) repeat-x; }
+.requid_4 { background: linear-gradient(#02AABD, #00CDAC) repeat-x; }
+.requid_5 { background: linear-gradient(#662D8C, #ED1E79) repeat-x; }
 
+.p-requid { 
+    position: relative; 
+    overflow: hidden;
+    width: 100%;
+}
 
+.c-requid {
+    -webkit-animation: flow 5s infinite ease;
+    position: absolute;
+    height: 40px;
+    width: 100%;
+}
 
+@-webkit-keyframes flow {
+    0%   { margin-top: 0; }
+    25%  { margin-top: -10px; }
+    50%  { margin-top: 0px; }
+    75%  { margin-top: -10px; }
+    100% { margin-top: 0;}
+}
 
 
 /* ==================== ==================== ==================== */
