@@ -74,11 +74,11 @@ const fnChangeLevel = (mode) => {
 // Create Table Area
 // ==================== ==================== ==================== ====================
 const fnCreateTable = () => {
-    if (level == 1) { totalRequid = 3; requidHeight = '33%'; itemPosition = '380px'; }
-    if (level == 2) { totalRequid = 4; requidHeight = '25%'; itemPosition = '330px'; }
-    if (level == 3) { totalRequid = 4; requidHeight = '25%'; itemPosition = '280px'; }
-    if (level == 4) { totalRequid = 5; requidHeight = '20%'; itemPosition = '230px'; }
-    if (level == 5) { totalRequid = 5; requidHeight = '20%'; itemPosition = '180px'; }
+    if (level == 1) { totalRequid = 3; requidHeight = '33%'; itemPosition = '380px'; }  // 3 | 3 * 3 = 27
+    if (level == 2) { totalRequid = 4; requidHeight = '25%'; itemPosition = '330px'; }  // 4 | 4 * 4 = 64
+    if (level == 3) { totalRequid = 4; requidHeight = '25%'; itemPosition = '280px'; }  // 4 | 5 * 5 = 100
+    if (level == 4) { totalRequid = 5; requidHeight = '20%'; itemPosition = '230px'; }  // 5 | 6 * 6 = 180
+    if (level == 5) { totalRequid = 5; requidHeight = '20%'; itemPosition = '180px'; }  // 5 | 7 * 7 = 245
     
     // =============== =============== =============== ===============
     // Initialized Table Inner HTML
@@ -101,7 +101,8 @@ const fnCreateTable = () => {
             // ========== ========== ========== ==========
             const beaker = document.createElement('div');
             const cell = document.createElement('div');
-            cell.className = 'table-cell';
+            cell.addEventListener('click', (e) => {fnClickCell(e)});
+            cell.className = 'table-cell ' + i + '_' + j;
             beaker.className = 'beaker';
             
             // ========== ========== ========== ==========
@@ -159,12 +160,6 @@ const fnCreateTable = () => {
 
 // ==================== ==================== ==================== ====================
 // Create Game Set
-//
-// 3 | 3 * 3 = 27
-// 4 | 4 * 4 = 64
-// 4 | 5 * 5 = 100
-// 5 | 6 * 6 = 180
-// 5 | 7 * 7 = 245
 // ==================== ==================== ==================== ====================
 const fnCreateGameSet = () => {
     const color = [1, 2, 3, 4, 5];
@@ -198,4 +193,48 @@ const fnCreateGameSet = () => {
 
         gameSet.push(beaker);
     }
+}
+
+
+
+
+
+// ==================== ==================== ==================== ====================
+// Beaker Click Event
+// ==================== ==================== ==================== ====================
+const fnClickCell = (e) => {
+    let cell = null; if (String(e.target.className).indexOf('beaker') == -1) {
+        cell = e.target.parentElement.parentElement.parentElement;
+    } else { cell = e.target.parentElement; }
+
+    // ==================== ==================== ====================
+    // Existed Active Class Cell
+    // ==================== ==================== ====================
+    if (document.getElementsByClassName('active').length > 0) {
+        const myself = document.getElementsByClassName('active')[0];
+        // ========== ========== ========== ==========
+        // Delete Active Class When Click Self
+        // ========== ========== ========== ==========
+        if (myself.className == cell.className) {
+            myself.classList.remove('active');
+            return false;
+        }
+
+        // ========== ========== ========== ==========
+        // Move Requid From Self To Cell
+        // ========== ========== ========== ==========
+        console.log(myself);
+        console.log(cell);
+
+        myself.classList.remove('active');
+        return;
+    }
+
+    // ==================== ==================== ====================
+    // Nothing Active Class Cell
+    // ==================== ==================== ====================
+
+    if (String(cell.className).indexOf('active') != -1) {
+        cell.classList.remove('active');
+    } else { cell.classList.add('active'); }
 }
