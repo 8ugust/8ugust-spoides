@@ -146,8 +146,7 @@ const fnCreateTable = () => {
     document.getElementsByClassName('item-wrap')[0].style.right = itemPosition;
     document.getElementById('itemBeaker').parentElement.addEventListener('click', (e) => {fnClickCell(e)});
 
-    
-    loading.display = 'none';
+    setTimeout(() => { loading.display = 'none'; }, 1000)
 }
 
 
