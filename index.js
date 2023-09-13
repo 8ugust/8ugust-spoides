@@ -88,6 +88,7 @@ const fnCreateTable = () => {
     itemBeaker.innerHTML = '';
     loading.display = 'flex';
     target.innerHTML = '';
+    let index = 0;
     fnCreateGameSet();
 
     // =============== =============== =============== ===============
@@ -102,7 +103,7 @@ const fnCreateTable = () => {
             const beaker = document.createElement('div');
             const cell = document.createElement('div');
             cell.addEventListener('click', (e) => {fnClickCell(e)});
-            cell.className = 'table-cell ' + i + '_' + j;
+            cell.className = 'table-cell ' + (index++);
             beaker.className = 'beaker';
             
             // ========== ========== ========== ==========
@@ -135,7 +136,7 @@ const fnCreateTable = () => {
     // =============== =============== =============== ===============
     Array.from(document.querySelectorAll('#tableTarget .beaker')).forEach( (beaker, i) => {
         Array.from(beaker.childNodes).forEach( (div, j) => {
-            div.firstChild.className += ' requid_' + gameSet[i][j];
+            div.firstElementChild.className += ' requid_' + gameSet[i][j];
         })
     });
 
@@ -205,13 +206,13 @@ const fnClickCell = (e) => {
     // ==================== ==================== ====================
     // Return When Empty Item Beaker Click
     // ==================== ==================== ====================
-    if (document.getElementsByClassName('active').length == 0 && cell.className.indexOf('item') != -1) {
+    if (document.getElementsByClassName('active').length == 0 && cell.firstElementChild.children.length == 0) {
         cell.classList.add('impossible'); setTimeout(() => {cell.classList.remove('impossible')}, 300); 
         return false;
     }
 
     // ==================== ==================== ====================
-    // Existed Active Class Cell
+    // If Existed Active Class Cell
     // ==================== ==================== ====================
     if (document.getElementsByClassName('active').length > 0) {
         const myself = document.getElementsByClassName('active')[0];
@@ -224,7 +225,7 @@ const fnClickCell = (e) => {
         }
 
         // ========== ========== ========== ==========
-        // Move Requid From Self To Cell
+        // Return When Full Beaker Clcik
         // ========== ========== ========== ==========
         if(cell.firstElementChild.children.length == totalRequid) {
             cell.classList.add('impossible');
@@ -232,14 +233,47 @@ const fnClickCell = (e) => {
             return false;
         };
 
+        // ========== ========== ========== ==========
+        // Move Requid From Self to Cell
+        // ========== ========== ========== ==========
+        const requid = myself.firstElementChild.lastChild;
+        const tIndex = cell.classList[1];
+        requid.remove();
+
+        if (tIndex != 'item') { document.querySelectorAll('#tableTarget .beaker')[tIndex].append(requid); }
+        else { document.getElementById('itemBeaker').append(requid); }
         myself.classList.remove('active');
+
+        // ========== ========== ========== ==========
+        // Check Cell Child Count Equal TotalRequid
+        // ========== ========== ========== ==========
+        if(cell.firstElementChild.children.length == totalRequid) {
+            const rArray = []; Array.from(cell.firstElementChild.children).forEach(pRequid => {
+                rArray.push(pRequid.firstElementChild.classList[1]);
+            })
+
+            if (rArray.every(v => v == rArray[0])) {
+                cell.firstElementChild.innerHTML = '';
+            }
+        };
+
+        // ========== ========== ========== ==========
+        // Check Clear Game
+        // ========== ========== ========== ==========
+        if (document.getElementsByClassName('p-requid').length == 0) {
+            alert('Level Clear');
+
+            if (level == 5) {
+                alert('Game All Clear')
+            } else { fnChangeLevel('U'); }
+        }
+
         return;
     }
 
     // ==================== ==================== ====================
     // Nothing Active Class Cell
     // ==================== ==================== ====================
-
     if (String(cell.className).indexOf('active') != -1) {
         cell.classList.remove('active');
     } else { cell.classList.add('active'); }
