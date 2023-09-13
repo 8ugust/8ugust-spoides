@@ -237,7 +237,6 @@ const fnClickCell = (e) => {
         // ========== ========== ========== ==========
         const requid = myself.firstElementChild.lastChild;
         const tIndex = cell.classList[1];
-        requid.remove();
 
         if (tIndex != 'item') { document.querySelectorAll('#tableTarget .beaker')[tIndex].append(requid); }
         else { document.getElementById('itemBeaker').append(requid); }
