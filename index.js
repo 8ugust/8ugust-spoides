@@ -116,12 +116,6 @@ const fnCreateTable = () => {
                 requidC.className = 'c-requid';
                 requidP.appendChild(requidC);
                 beaker.appendChild(requidP);
-
-                // Append Item Beaker
-                if (itemBeaker.children.length < totalRequid) {
-                    const copyRequid = requidP.cloneNode(true);
-                    itemBeaker.appendChild(copyRequid);
-                }
             }
             
             // ========== ========== ========== ==========
@@ -149,6 +143,7 @@ const fnCreateTable = () => {
     // Set Item Beaker Position
     // =============== =============== =============== ===============
     document.getElementsByClassName('item-wrap')[0].style.right = itemPosition;
+    document.getElementById('itemBeaker').parentElement.addEventListener('click', (e) => {fnClickCell(e)});
 
     
     loading.display = 'none';
@@ -208,6 +203,14 @@ const fnClickCell = (e) => {
     } else { cell = e.target.parentElement; }
 
     // ==================== ==================== ====================
+    // Return When Empty Item Beaker Click
+    // ==================== ==================== ====================
+    if (document.getElementsByClassName('active').length == 0 && cell.className.indexOf('item') != -1) {
+        cell.classList.add('impossible'); setTimeout(() => {cell.classList.remove('impossible')}, 300); 
+        return false;
+    }
+
+    // ==================== ==================== ====================
     // Existed Active Class Cell
     // ==================== ==================== ====================
     if (document.getElementsByClassName('active').length > 0) {
@@ -223,8 +226,11 @@ const fnClickCell = (e) => {
         // ========== ========== ========== ==========
         // Move Requid From Self To Cell
         // ========== ========== ========== ==========
-        console.log(myself);
-        console.log(cell);
+        if(cell.firstElementChild.children.length == totalRequid) {
+            cell.classList.add('impossible');
+            setTimeout(() => {cell.classList.remove('impossible');}, 300);
+            return false;
+        };
 
         myself.classList.remove('active');
         return;
