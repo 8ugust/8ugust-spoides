@@ -13,9 +13,10 @@ body {
     background: linear-gradient(#2E3192, #1BFFFF);
     flex-direction: column;
     align-items: center;
+    position: relative;
     display: flex;
     height: 900px;
-    width: 1000px;
+    width: 1300px;
 }
 
 .logo {
@@ -28,7 +29,7 @@ body {
 
 
 /* ==================== ==================== ==================== */
-/* Loading Area */
+/* Level Area */
 /* ==================== ==================== ==================== */
 .level-wrap {
     justify-content: center;
@@ -129,6 +130,32 @@ td {
 }
 
 
+
+
+
+/* ==================== ==================== ==================== */
+/* Item Area */
+/* ==================== ==================== ==================== */
+.item-wrap {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    height: 900px;
+    width: 100px;
+    right: 0;
+}
+
+.item-inner {
+    height: 100px;
+    width: 100px;
+}
+
+
+
+
+
 /* ==================== ==================== ==================== */
 /* Loading Area */
 /* ==================== ==================== ==================== */
@@ -139,7 +166,7 @@ td {
     position: absolute;
     display: none;
     height: 900px;
-    width: 1000px;
+    width: 1300px;
 }
 
 .loading-bar {

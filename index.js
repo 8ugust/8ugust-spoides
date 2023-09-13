@@ -2,6 +2,8 @@
 // Declare Global Variation
 // ==================== ==================== ==================== ====================
 const gameSet = [];
+let itemPosition;
+let requidHeight;
 let totalRequid;
 let loading;
 let level;
@@ -72,15 +74,18 @@ const fnChangeLevel = (mode) => {
 // Create Table Area
 // ==================== ==================== ==================== ====================
 const fnCreateTable = () => {
+    if (level == 1) { totalRequid = 3; requidHeight = '33%'; itemPosition = '380px'; }
+    if (level == 2) { totalRequid = 4; requidHeight = '25%'; itemPosition = '330px'; }
+    if (level == 3) { totalRequid = 4; requidHeight = '25%'; itemPosition = '280px'; }
+    if (level == 4) { totalRequid = 5; requidHeight = '20%'; itemPosition = '230px'; }
+    if (level == 5) { totalRequid = 5; requidHeight = '20%'; itemPosition = '180px'; }
+    
     // =============== =============== =============== ===============
     // Initialized Table Inner HTML
     // =============== =============== =============== ===============
+    const itemBeaker = document.getElementById('itemBeaker');
     const target = document.getElementById('tableTarget');
-    if (level == 1) totalRequid = 3;
-    if (level == 2) totalRequid = 4;
-    if (level == 3) totalRequid = 4;
-    if (level == 4) totalRequid = 5;
-    if (level == 5) totalRequid = 5;
+    itemBeaker.innerHTML = '';
     loading.display = 'flex';
     target.innerHTML = '';
     fnCreateGameSet();
@@ -105,15 +110,17 @@ const fnCreateTable = () => {
             for (k = 0; k < totalRequid; k++) {
                 const requidP = document.createElement('div');
                 const requidC = document.createElement('div');
-                if (level == 1) requidP.style.height = '33%';
-                if (level == 2) requidP.style.height = '25%';
-                if (level == 3) requidP.style.height = '25%';
-                if (level == 4) requidP.style.height = '20%';
-                if (level == 5) requidP.style.height = '20%';
+                requidP.style.height = requidHeight;
                 requidP.className = 'p-requid';
                 requidC.className = 'c-requid';
                 requidP.appendChild(requidC);
                 beaker.appendChild(requidP);
+
+                // Append Item Beaker
+                if (itemBeaker.children.length < totalRequid) {
+                    const copyRequid = requidP.cloneNode(true);
+                    itemBeaker.appendChild(copyRequid);
+                }
             }
             
             // ========== ========== ========== ==========
@@ -131,23 +138,16 @@ const fnCreateTable = () => {
     // =============== =============== =============== ===============
     // Set Requid Class Name
     // =============== =============== =============== ===============
-    Array.from(document.getElementsByClassName('beaker')).forEach( (beaker, i) => {
+    Array.from(document.querySelectorAll('#tableTarget .beaker')).forEach( (beaker, i) => {
         Array.from(beaker.childNodes).forEach( (div, j) => {
             div.firstChild.className += ' requid_' + gameSet[i][j];
         })
     });
-        // const array = []; const count = Math.pow((Number(level) + 2), 2) * totalRequid;
-        // for (let i = 0; i < count; i++) array.push(i);
-        // array.sort(() => Math.random() - 0.5);
-        
 
-        // const requidArea = document.querySelectorAll('.beaker div');
-        // for (let i = 0; i < count; i++) {
-        //     const div = requidArea[array[i]];
-        //     const set = gameSet[array[i]];
-            
-        // }
-
+    // =============== =============== =============== ===============
+    // Set Item Beaker Position
+    // =============== =============== =============== ===============
+    document.getElementsByClassName('item-wrap')[0].style.right = itemPosition;
 
     
     loading.display = 'none';
