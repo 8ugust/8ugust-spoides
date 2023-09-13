@@ -101,11 +101,11 @@ td {
     width: 100%;
 }
 
-.requid_1 { background: red; }
-.requid_2 { background: green; }
-.requid_3 { background: yellow; }
-.requid_4 { background: blue; }
-.requid_5 { background: purple; }
+.requid_1 { background: linear-gradient(to right, #D4145A, #FBB03B); }
+.requid_2 { background: linear-gradient(to right, #009245, #FCEE21); }
+.requid_3 { background: linear-gradient(to right, #FFECD2, #FCB69F); }
+.requid_4 { background: linear-gradient(to right, #02AABD, #00CDAC); }
+.requid_5 { background: linear-gradient(to right, #662D8C, #ED1E79); }
 
 
 
