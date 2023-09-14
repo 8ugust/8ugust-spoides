@@ -5,6 +5,7 @@ const gameSet = [];
 let itemPosition;
 let requidHeight;
 let totalRequid;
+let one = true;
 let loading;
 let message;
 let level;
@@ -149,7 +150,10 @@ const fnCreateTable = () => {
     // Set Item Beaker Position
     // =============== =============== =============== ===============
     document.getElementsByClassName('item-wrap')[0].style.right = itemPosition;
-    document.getElementById('itemBeaker').parentElement.addEventListener('click', (e) => {fnClickCell(e)});
+    if (one == true) {
+        document.getElementById('itemBeaker').parentElement.addEventListener('click', (e) => {fnClickCell(e);});
+        one = false;
+    }
 
     setTimeout(() => { loading.display = 'none'; }, 1000)
 }
@@ -218,6 +222,7 @@ const fnClickCell = (e) => {
     // ==================== ==================== ====================
     // If Existed Active Class Cell
     // ==================== ==================== ====================
+    console.log(document.getElementsByClassName('active'))
     if (document.getElementsByClassName('active').length > 0) {
         const myself = document.getElementsByClassName('active')[0];
         // ========== ========== ========== ==========
@@ -271,12 +276,13 @@ const fnClickCell = (e) => {
         return;
     }
 
+    
     // ==================== ==================== ====================
     // Nothing Active Class Cell
     // ==================== ==================== ====================
     if (String(cell.className).indexOf('active') != -1) {
         cell.classList.remove('active');
-    } else { cell.classList.add('active'); }
+    } else { cell.classList.add('active');}
 }
 
 
