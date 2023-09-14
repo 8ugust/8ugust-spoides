@@ -214,3 +214,59 @@ td {
     50%  { color: white;}
     100% { color: grey; }
 }
+
+
+
+
+
+/* ==================== ==================== ==================== */
+/* Message Area */
+/* ==================== ==================== ==================== */
+#message-wrap {
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-animation: show 1s ease;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    display: none;
+    height: 900px;
+    width: 1300px;
+}
+
+@-webkit-keyframes show {
+    0%      { opacity: 0; }
+    100%    { opacity: 1; }
+}
+
+.message-inner {
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    background: #EDEDED;
+    display: flex;
+    height: 300px;
+    width: 400px;
+}
+
+.message-inner > img {
+    height: 200px;
+    width: 200px;
+}
+
+.next-btn {
+    background: linear-gradient(to right, #2E3192, #1BFFFF);
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    height: 80px;
+    width: 350px;
+}
+
+#btnTxt {
+    font-weight: bold;
+    font-size: 30px;
+    color: #EDEDED;
+}

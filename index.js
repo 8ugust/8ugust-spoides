@@ -6,6 +6,7 @@ let itemPosition;
 let requidHeight;
 let totalRequid;
 let loading;
+let message;
 let level;
 
 
@@ -17,8 +18,9 @@ let level;
 // Document On Load Event
 // ==================== ==================== ==================== ====================
 document.addEventListener("DOMContentLoaded", () => {
-    level = document.getElementById('level').innerHTML;
+    message = document.getElementById('message-wrap').style;
     loading = document.getElementById('loading-wrap').style;
+    level = document.getElementById('level').innerHTML;
     fnCreateTable();
 })
 
@@ -30,10 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 // Function Level Change Evnet.
 // ==================== ==================== ==================== ====================
 const fnChangeLevel = (mode) => {
-
+    
     // =============== =============== =============== ===============
     // Return.
     // =============== =============== =============== ===============
+    if (mode == 'R' && level != 5) mode = 'U';
     const upBtn = document.getElementById('levelUp');
     const dnBtn = document.getElementById('levelDn');
     if (mode == 'U' && level == 5 || mode == 'D' && level == 1) {
@@ -86,6 +89,7 @@ const fnCreateTable = () => {
     const itemBeaker = document.getElementById('itemBeaker');
     const target = document.getElementById('tableTarget');
     itemBeaker.innerHTML = '';
+    message.display = 'none';
     loading.display = 'flex';
     target.innerHTML = '';
     let index = 0;
@@ -260,11 +264,8 @@ const fnClickCell = (e) => {
         // Check Clear Game
         // ========== ========== ========== ==========
         if (document.getElementsByClassName('p-requid').length == 0) {
-            alert('Level Clear');
-
-            if (level == 5) {
-                alert('Game All Clear')
-            } else { fnChangeLevel('U'); }
+            if (level == 5) { fnShowMessage('Play Again') } 
+            else { fnShowMessage('Next Level'); }
         }
 
         return;
@@ -276,4 +277,16 @@ const fnClickCell = (e) => {
     if (String(cell.className).indexOf('active') != -1) {
         cell.classList.remove('active');
     } else { cell.classList.add('active'); }
+}
+
+
+
+
+
+// ==================== ==================== ==================== ====================
+// Beaker Click Event
+// ==================== ==================== ==================== ====================
+const fnShowMessage = (msg) => {
+    document.getElementById('btnTxt').innerHTML = msg;
+    message.display = 'flex';
 }
