@@ -134,9 +134,10 @@ const fnCreateTable = () => {
     // =============== =============== =============== ===============
     // Set Requid Class Name
     // =============== =============== =============== ===============
-    Array.from(document.querySelectorAll('#tableTarget .beaker')).forEach( (beaker, i) => {
-        Array.from(beaker.childNodes).forEach( (div, j) => {
-            div.firstElementChild.className += ' requid_' + gameSet[i][j];
+    Array.from(document.querySelectorAll('#tableTarget .beaker')).forEach( beaker => {
+        Array.from(beaker.childNodes).forEach( pRequid => {
+            const cName = 'requid_' + gameSet.shift();
+            pRequid.firstElementChild.classList.add(cName);
         })
     });
 
@@ -160,7 +161,6 @@ const fnCreateGameSet = () => {
     const color = [1, 2, 3, 4, 5];
     const line = Number(level) + 2;
     const loop = line * line;
-    const tempSet = [];
     gameSet.length = 0;
 
     // ==================== ==================== ====================
@@ -168,25 +168,26 @@ const fnCreateGameSet = () => {
     // ==================== ==================== ====================
     for (let i=0; i<loop; i++) {
         for (let j=0; j<totalRequid; j++) {
-            tempSet.push(color[j]);
+            gameSet.push(color[j]);
         }
     }
 
     // ==================== ==================== ====================
     // Create Game Set Except Duplicate Case
     // ==================== ==================== ====================
-    tempSet.sort(() => Math.random() - 0.5);
-    for (let i = 0; i < loop; i++) {
-        const beaker = [];
-
-        while (beaker.length < totalRequid) {
-            const pop = tempSet.pop();
-            if (beaker.filter(x => x == pop).length == (totalRequid-1)) {
-                tempSet.push(pop); tempSet.sort(() => Math.random() - 0.5);
-            } else beaker.push(pop);
+    gameSet.sort(() => Math.random() - 0.5); while (true) {
+        let isNotSame = true; for (let i = 0; i < gameSet.length / totalRequid; i++) {
+            const num_0 = gameSet[i * 3 + 0];
+            const num_1 = gameSet[i * 3 + 1];
+            const num_2 = gameSet[i * 3 + 2];
+            if ([num_0, num_1, num_2].every((val, i, arr) => val == arr[0])) {
+                gameSet.sort(() => Math.random() - 0.5);
+                isNotSame = false;
+                break;
+            }
         }
 
-        gameSet.push(beaker);
+        if (isNotSame) break;
     }
 }
 
