@@ -174,10 +174,12 @@ const fnCreateGameSet = () => {
     // ==================== ==================== ====================
     // Create Total Requid
     // ==================== ==================== ====================
-    for (let i=0; i<loop; i++) {
-        for (let j=0; j<totalRequid; j++) {
-            gameSet.push(color[j]);
+    for (let i=0; i<totalRequid; i++) {
+        for (let j=0; j<loop; j++) {
+            gameSet.push(color[i]);
         }
+    
+        console.log(gameSet.filter(x => x == color[i]))
     }
 
     // ==================== ==================== ====================
@@ -222,7 +224,6 @@ const fnClickCell = (e) => {
     // ==================== ==================== ====================
     // If Existed Active Class Cell
     // ==================== ==================== ====================
-    console.log(document.getElementsByClassName('active'))
     if (document.getElementsByClassName('active').length > 0) {
         const myself = document.getElementsByClassName('active')[0];
         // ========== ========== ========== ==========
