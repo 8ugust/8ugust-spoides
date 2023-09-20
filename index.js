@@ -168,19 +168,25 @@ const fnCreateTable = () => {
 const fnCreateGameSet = () => {
     const color = [1, 2, 3, 4, 5];
     const line = Number(level) + 2;
-    const loop = line * line;
+    const bCount = line * line;
     gameSet.length = 0;
 
     // ==================== ==================== ====================
     // Create Total Requid
     // ==================== ==================== ====================
-    for (let i=0; i<totalRequid; i++) {
-        for (let j=0; j<loop; j++) {
+    const etc = bCount % totalRequid;
+    for (let i=0; i<bCount - etc; i++) {
+        for (let j=0; j<totalRequid; j++) {
+            gameSet.push(color[j]);
+        }
+    }
+
+    for (let i = 0; i < etc; i++) {
+        for (let j=0; j<totalRequid; j++) {
             gameSet.push(color[i]);
         }
-    
-        console.log(gameSet.filter(x => x == color[i]))
     }
+
 
     // ==================== ==================== ====================
     // Create Game Set Except Duplicate Case
