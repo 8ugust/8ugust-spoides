@@ -254,9 +254,13 @@ const fnClickCell = (e) => {
         // ========== ========== ========== ==========
         const requid = myself.firstElementChild.lastChild;
         const tIndex = cell.classList[1];
+        const target = (tIndex != 'item')
+            ? document.querySelectorAll('#tableTarget .beaker')[tIndex]
+            : document.getElementById('itemBeaker');
 
-        if (tIndex != 'item') { document.querySelectorAll('#tableTarget .beaker')[tIndex].append(requid); }
-        else { document.getElementById('itemBeaker').append(requid); }
+        requid.style.height = '0%';
+        const rCopy = requid.cloneNode(true); target.append(rCopy); 
+        setTimeout(() => {rCopy.style.height = requidHeight; requid.remove();}, 100);
         myself.classList.remove('active');
 
         // ========== ========== ========== ==========
@@ -268,17 +272,23 @@ const fnClickCell = (e) => {
             })
 
             if (rArray.every(v => v == rArray[0])) {
-                cell.firstElementChild.innerHTML = '';
+                Array.from(cell.firstElementChild.children).forEach( pRequid => {
+                    setTimeout(() => {pRequid.style.height = '0%';}, 300)
+                })
+                
+                setTimeout(() => {cell.firstElementChild.innerHTML = '';}, 400)
             }
         };
 
         // ========== ========== ========== ==========
         // Check Clear Game
         // ========== ========== ========== ==========
-        if (document.getElementsByClassName('p-requid').length == 0) {
-            if (level == 5) { fnShowMessage('Play Again') } 
-            else { fnShowMessage('Next Level'); }
-        }
+        setTimeout(() => {
+            if (document.getElementsByClassName('p-requid').length == 0) {
+                if (level == 5) { fnShowMessage('Play Again') } 
+                else { fnShowMessage('Next Level'); }
+            }
+        }, 500)
 
         return;
     }
