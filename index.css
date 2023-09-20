@@ -112,6 +112,7 @@ td {
 .requid_5 { background: linear-gradient(#662D8C, #ED1E79) repeat-x; }
 
 .p-requid { 
+    transition: all 0.3s ease;
     position: relative; 
     overflow: hidden;
     width: 100%;
