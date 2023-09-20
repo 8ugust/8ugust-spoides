@@ -39,6 +39,7 @@ body {
 }
 
 .level-btn {
+    -webkit-tap-highlight-color : transparent !important;
     padding-right: 20px;
     padding-left: 20px;
     color: #EDEDED;
@@ -83,6 +84,7 @@ td {
 }
 
 .table-cell {
+    -webkit-tap-highlight-color : transparent !important;
     height: calc(100% - 20px);
     width: calc(100% - 20px);
     justify-content: center;
